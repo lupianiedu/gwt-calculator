@@ -1,0 +1,2 @@
+serviceClass: com.inaer.calculator.client.GreetingService
+path: 4ADFCEC7C1F01FF38A534AE9183BD2E2.gwt.rpc
