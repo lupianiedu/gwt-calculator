@@ -3,6 +3,7 @@
 # Package Files #
 *.jar
 *.war
+!lib/gxt.jar
 
 # gwt caches and compiled units #
 war/gwt_bree/

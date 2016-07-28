@@ -16,16 +16,24 @@ public class MeasureConverterServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public String convertToBinary(Float number) throws IllegalArgumentException {
 		String binary = Integer.toBinaryString(Float.floatToIntBits(number));
-		PersistenceManager pm = getPersistenceManager();
-	    try {
-	      pm.makePersistent(new Conversion(number, binary));
-	    } finally {
-	      pm.close();
-	    }
+		persistNumber(number, binary);
 		return binary;
 	}
 
 	private PersistenceManager getPersistenceManager() {
 		return PMF.getPersistenceManager();
+	}
+
+	private void persistNumber(Float number, String binary) {
+		try {
+			PersistenceManager pm = getPersistenceManager();
+			try {
+				pm.makePersistent(new Conversion(number, binary));
+			} finally {
+				pm.close();
+			}
+		} catch (Exception e) {
+
+		}
 	}
 }
