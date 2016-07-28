@@ -15,6 +15,8 @@ import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
  */
 public class INAER_Calculator implements EntryPoint {
     private static final float DEFAULT_VALUE = 0f;
+    
+    private static final String DEC_STR = ".";
  
     // Calculator variables
     private Float result;
@@ -53,7 +55,30 @@ public class INAER_Calculator implements EntryPoint {
     }
  
     private void addManipulationButtons() {
+		TextButton btnDec = new TextButton(DEC_STR);
+		btnDec.addSelectHandler(new SelectHandler() {
+			@Override
+			public void onSelect(SelectEvent event) {
+				if (isNewNumber) {
+					screenOutput.setValue(DEFAULT_VALUE);
+				}
+				if (!screenOutput.getText().contains(".")) {
+					screenOutput.setText(screenOutput.getText() + ".");
+					isNewNumber = false;
+				}
+			}
+		});
+		RootPanel.get("btnDec").add(btnDec);
 
+		TextButton btnNeg = new TextButton("+/-");
+		btnNeg.addSelectHandler(new SelectHandler() {
+			@Override
+			public void onSelect(SelectEvent event) {
+				isNewNumber = false;
+				screenOutput.setValue(screenOutput.getValue() * -1);
+			}
+		});
+		RootPanel.get("btnNeg").add(btnNeg);
     }
  
     private void addOperatorButtons() {
@@ -83,7 +108,24 @@ public class INAER_Calculator implements EntryPoint {
     }
  
     private void addDeletionButtons() {
+    	TextButton ceButton = new TextButton("CE");
+		ceButton.addSelectHandler(new SelectHandler() {
+			@Override
+			public void onSelect(SelectEvent event) {
+				partialInit();
+			}
+		});
+		RootPanel.get("btnCE").add(ceButton);
 
+		// ADD C BUTTON
+		TextButton cButton = new TextButton("C");
+		cButton.addSelectHandler(new SelectHandler() {
+			@Override
+			public void onSelect(SelectEvent event) {
+				init();
+			}
+		});
+		RootPanel.get("btnC").add(cButton);
     }
  
     private void addNumberButtons() {
