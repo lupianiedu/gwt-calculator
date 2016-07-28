@@ -1,5 +1,7 @@
 package com.inaer.calculator.server.data;
 
+import java.util.Date;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -15,11 +17,22 @@ public class Conversion {
 	private Float number;
 	@Persistent
 	private String binary;
+	@Persistent
+	private Date date;
 
 	public Conversion(Float number, String binary) {
 		super();
 		this.number = number;
 		this.binary = binary;
+		this.date = new Date();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public Date getDate() {
+		return date;
 	}
 
 	public Float getNumber() {
