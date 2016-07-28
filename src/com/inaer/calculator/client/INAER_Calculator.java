@@ -57,7 +57,29 @@ public class INAER_Calculator implements EntryPoint {
     }
  
     private void addOperatorButtons() {
-
+        TextButton btnPls = new TextButton("+");
+        btnPls.addSelectHandler(new OperationHandler(Operation.PLUS));
+        RootPanel.get("btnPls").add(btnPls);
+ 
+        TextButton btnMns = new TextButton("-");
+        btnMns.addSelectHandler(new OperationHandler(Operation.MINUS));
+        RootPanel.get("btnMns").add(btnMns);
+ 
+        TextButton btnMul = new TextButton("*");
+        btnMul.addSelectHandler(new OperationHandler(Operation.MULT));
+        RootPanel.get("btnMul").add(btnMul);
+ 
+        TextButton btnDiv = new TextButton("/");
+        btnDiv.addSelectHandler(new OperationHandler(Operation.DIV));
+        RootPanel.get("btnDiv").add(btnDiv);
+ 
+        TextButton btnPct = new TextButton("%");
+        btnPct.addSelectHandler(new OperationHandler(Operation.MOD));
+        RootPanel.get("btnPct").add(btnPct);
+ 
+        TextButton btnEql = new TextButton("=");
+        btnEql.addSelectHandler(new OperationHandler(Operation.EQ));
+        RootPanel.get("btnEql").add(btnEql);
     }
  
     private void addDeletionButtons() {
