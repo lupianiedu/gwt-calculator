@@ -1,2 +1,3 @@
 # Module inaer_calculator
 # RPC service class, partial path of RPC policy file
+com.inaer.calculator.client.MeasureConverterService, 208BDE2743E1B75AD7F0CE14CB16C791.gwt.rpc

@@ -1,7 +1,9 @@
 package com.inaer.calculator.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.inaer.calculator.shared.Operation;
 import com.sencha.gxt.widget.core.client.button.TextButton;
@@ -23,6 +25,9 @@ public class INAER_Calculator implements EntryPoint {
     private Operation pendingOp;
     final NumberField<Float> screenOutput = new NumberField<Float>(new NumberPropertyEditor.FloatPropertyEditor());
     private boolean isNewNumber;
+    
+    // GWT RPC services
+ 	private MeasureConverterServiceAsync measureConverterService = GWT.create(MeasureConverterService.class);
  
     private void partialInit() {
         screenOutput.setValue(DEFAULT_VALUE);
@@ -51,7 +56,25 @@ public class INAER_Calculator implements EntryPoint {
     }
  
     private void addBinaryConversionButton() {
+    	TextButton btnBin = new TextButton("Bin");
+		btnBin.addSelectHandler(new SelectHandler() {			
+			@Override
+			public void onSelect(SelectEvent event) {
+				measureConverterService.convertToBinary(result, new AsyncCallback<String>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						screenOutput.setText(caught.getMessage());
+					}
 
+					@Override
+					public void onSuccess(String result) {
+						screenOutput.setText(result);
+					}
+				});
+				
+			};
+		});
+		RootPanel.get("btnBin").add(btnBin);
     }
  
     private void addManipulationButtons() {
